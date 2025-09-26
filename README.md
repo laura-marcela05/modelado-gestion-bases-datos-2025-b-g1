@@ -21,7 +21,7 @@ Los commits en GitHub pueden tener diferentes iconos, que indican el tipo de cam
 ---
 
 ## Contenido del Repositorio 
--** Class Activity-Docker → Carpeta de la actividad realizada de Docker para instalar motores de bases de datos en contenedores con puertos diferentes.
+-** Class Activity-Docker** → Carpeta de la actividad realizada de Docker para instalar motores de bases de datos en contenedores con puertos diferentes.
 ---
 
 ¡Este repositorio será actualizado con más material a lo largo del curso! 
