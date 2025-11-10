@@ -1,0 +1,196 @@
+
+// Operaciones CRUD
+
+//Insertar
+
+//Usuarios
+db.usuarios.insertMany([
+  {
+    _id: ObjectId(),
+    nombre: "Manuel Lucio Carbajal",
+    correo: "mluciocarbajar@gmail.com",
+    fechaRegistro: ISODate("2025-11-09T12:33:00Z"),
+    telefono: "33828832",
+    seguidores: [],
+    siguiendo: ["u002"]
+  },
+  {
+    _id: ObjectId(),
+    nombre: "Carlos Urriago",
+    correo: "carlos.urriago@gmail.com",
+    fechaRegistro: ISODate("2025-11-09T12:35:00Z"),
+    telefono: "3014567890",
+    seguidores: ["u001"],
+    siguiendo: ["u003"]
+  },
+  {
+    _id: ObjectId(),
+    nombre: "María Gómez",
+    correo: "maria.g@gmail.com",
+    fechaRegistro: ISODate("2025-11-09T14:00:00Z"),
+    telefono: "3992828",
+    seguidores: ["u002"],
+    siguiendo: ["u002", "u001"]
+  },
+  {
+    _id: ObjectId(),
+    nombre: "Andrés Tovar",
+    correo: "andres.tovar@gmail.com",
+    fechaRegistro: ISODate("2025-11-09T14:30:00Z"),
+    telefono: "3928282",
+    seguidores: [],
+    siguiendo: ["u001", "u002"]
+  },
+  {
+    _id: ObjectId(),
+    nombre: "Dilia Quintero",
+    correo: "dilia.mar@gmail.com",
+    fechaRegistro: ISODate("2025-11-09T16:00:00Z"),
+    telefono: "61618181",
+    seguidores: ["u002"],
+    siguiendo: ["u001"]
+  }
+])
+
+//Publicaciones
+db.publicaciones.insertMany([
+  {
+    _id: ObjectId(),
+    usuario_id: "u001",
+    fechaPublicacion: ISODate("2025-11-09T14:30:00Z"),
+    contenido: "¡Me quede esperando el video que el profesor prometió subir!",
+    etiquetas: ["Profesor", "NoSQL"],
+    comentarios: [
+      { usuario_id: "u002", texto: "Yo también", fecha: ISODate("2025-11-09T14:50:00Z") },
+      { usuario_id: "u003", texto: "MongoDB es genial para proyectos", fecha: ISODate("2025-11-09T15:10:00Z") }
+    ],
+    reacciones: ["r001", "r002"]
+  },
+  {
+    _id: ObjectId(),
+    usuario_id: "u002",
+    fechaPublicacion: ISODate("2025-11-09T17:00:00Z"),
+    contenido: "MongoBD es complicado",
+    etiquetas: ["MongoDB"],
+    comentarios: [],
+    reacciones: ["r003"]
+  },
+  {
+    _id: ObjectId(),
+    usuario_id: "u003",
+    fechaPublicacion: ISODate("2025-11-09T18:00:00Z"),
+    contenido: "¿SQL o NoSQL? Ya ni sé qué elegir",
+    etiquetas: ["SQL", "NoSQL"],
+    comentarios: [],
+    reacciones: []
+  },
+  {
+    _id: ObjectId(),
+    usuario_id: "u004",
+    fechaPublicacion: ISODate("2025-11-09T19:00:00Z"),
+    contenido: "Hoy amanecí con un dolor de espalda",
+    etiquetas: ["😞", "dolor de espalda"],
+    comentarios: [],
+    reacciones: ["r004"]
+  },
+  {
+    _id: ObjectId(),
+    usuario_id: "u005",
+    fechaPublicacion: ISODate("2025-11-06T20:00:00Z"),
+    contenido: "Las bases NoSQL son geniales",
+    etiquetas: ["NoSQL", "genial"],
+    comentarios: [],
+    reacciones: []
+  }
+])
+
+//Comentarios
+db.comentarios.insertMany([
+  {
+    _id: ObjectId(),
+    publicacion_id: "p001",
+    usuario_id: "u002",
+    texto: "¡Yo también me quedé esperando!",
+    fecha: ISODate("2025-11-09T15:00:00Z")
+  },
+  {
+    _id: ObjectId(),
+    publicacion_id: "p001",
+    usuario_id: "u003",
+    texto: "MongoDB no es complicado, solo te falta entenderlo",
+    fecha: ISODate("2025-11-09T16:00:00Z")
+  },
+  {
+    _id: ObjectId(),
+    publicacion_id: "p002",
+    usuario_id: "u001",
+    texto: "Depende de lo que requieras",
+    fecha: ISODate("2025-11-09T17:10:00Z")
+  },
+  {
+    _id: ObjectId(),
+    publicacion_id: "p003",
+    usuario_id: "u002",
+    texto: "Eso es por estar sentada mal",
+    fecha: ISODate("2025-11-09T18:30:00Z")
+  },
+  {
+    _id: ObjectId(),
+    publicacion_id: "p004",
+    usuario_id: "u003",
+    texto: "Son muy útiles",
+    fecha: ISODate("2025-11-09T19:30:00Z")
+  }
+])
+
+// Reacciones
+db.reacciones.insertMany([
+  {
+    _id: ObjectId(),
+    tipo: "me gusta",
+    usuario_id: "u002",
+    publicacion_id: "p001",
+    fecha: ISODate("2025-11-09T15:05:00Z")
+  },
+  {
+    _id: ObjectId(),
+    tipo: "me encanta",
+    usuario_id: "u003",
+    publicacion_id: "p001",
+    fecha: ISODate("2025-11-09T15:10:00Z")
+  },
+  {
+    _id: ObjectId(),
+    tipo: "me divierte",
+    usuario_id: "u001",
+    publicacion_id: "p002",
+    fecha: ISODate("2025-11-09T17:05:00Z")
+  },
+  {
+    _id: ObjectId(),
+    tipo: "me gusta",
+    usuario_id: "u004",
+    publicacion_id: "p004",
+    fecha: ISODate("2025-11-09T19:05:00Z")
+  },
+  {
+    _id: ObjectId(),
+    tipo: "me asombra",
+    usuario_id: "u005",
+    publicacion_id: "p005",
+    fecha: ISODate("2025-11-09T20:10:00Z")
+  }
+])
+
+//Consulta
+db.publicaciones.find({ usuario_id: "u001" })
+
+//Actualizar
+db.usuarios.updateOne(
+  { nombre: "María Gómez" },
+  { $set: { telefono: "3200000000" } }
+)
+
+//Eliminar
+db.reacciones.find({ usuario_id: "u001" })
+

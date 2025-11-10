@@ -1,0 +1,84 @@
+// Creación de Colección
+
+//Usuarios
+db.createCollection("usuarios", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["_id", "nombre", "correo", "fechaRegistro"],
+      properties: {
+        _id: { bsonType: "objectId" },
+        nombre: { bsonType: "string" },
+        correo: { bsonType: "string" },
+        fechaRegistro: { bsonType: "date" },
+        telefono: { bsonType: ["string", "null"] },
+        seguidores: { bsonType: ["array"], items: { bsonType: "string" } },
+        siguiendo: { bsonType: ["array"], items: { bsonType: "string" } }
+      }
+    }
+  }
+})
+
+//Pulicaciones
+db.createCollection("publicaciones", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["_id", "usuario_id", "fechaPublicacion", "contenido"],
+      properties: {
+        _id: { bsonType: "objectId" },
+        usuario_id: { bsonType: "string" },
+        fechaPublicacion: { bsonType: "date" },
+        contenido: { bsonType: "string" },
+        etiquetas: { bsonType: ["array"], items: { bsonType: "string" } },
+        comentarios: {
+          bsonType: ["array"],
+          items: {
+            bsonType: "object",
+            required: ["usuario_id", "texto", "fecha"],
+            properties: {
+              usuario_id: { bsonType: "string" },
+              texto: { bsonType: "string" },
+              fecha: { bsonType: "date" }
+            }
+          }
+        },
+        reacciones: { bsonType: ["array"], items: { bsonType: "string" } }
+      }
+    }
+  }
+})
+
+//Comentarios
+db.createCollection("comentarios", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["_id", "publicacion_id", "usuario_id", "texto", "fecha"],
+      properties: {
+        _id: { bsonType: "objectId" },
+        publicacion_id: { bsonType: "string" },
+        usuario_id: { bsonType: "string" },
+        texto: { bsonType: "string" },
+        fecha: { bsonType: "date" }
+      }
+    }
+  }
+})
+
+//Reacciones
+db.createCollection("reacciones", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["_id", "tipo", "usuario_id", "publicacion_id", "fecha"],
+      properties: {
+        _id: { bsonType: "objectId" },
+        tipo: { bsonType: "string" },
+        usuario_id: { bsonType: "string" },
+        publicacion_id: { bsonType: "string" },
+        fecha: { bsonType: "date" }
+      }
+    }
+  }
+})
